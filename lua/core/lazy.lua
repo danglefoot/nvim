@@ -28,6 +28,12 @@ require("lazy").setup({ import = "plugins" }, {
   ui = {
     -- border = "rounded"
   },
+  -- Default condition: disable most plugins in VS Code
+  defaults = {
+    cond = function()
+      return not vim.g.vscode
+    end,
+  },
   performance = {
     rtp = {
       disabled_plugins = {

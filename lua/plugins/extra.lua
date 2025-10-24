@@ -5,9 +5,10 @@ return {
     opts = {},
   },
 
-  -- comments
+  -- comments (works in VS Code)
   {
     "numToStr/Comment.nvim",
+    cond = true, -- Override default: always enable (even in VS Code)
     opts = {},
     lazy = false,
   },
@@ -100,8 +101,10 @@ return {
     "editorconfig/editorconfig-vim",
   },
 
+  -- Enhanced navigation (works in VS Code)
   {
     "folke/flash.nvim",
+    cond = true, -- Override default: always enable (even in VS Code)
     event = "VeryLazy",
     ---@type Flash.Config
     opts = {},
@@ -154,8 +157,10 @@ return {
     opts = {},
   },
 
+  -- Text objects and editing enhancements (work in VS Code)
   {
     "echasnovski/mini.nvim",
+    cond = true, -- Override default: always enable (even in VS Code)
     config = function()
       -- Better Around/Inside textobjects
       --

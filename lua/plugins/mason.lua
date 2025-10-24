@@ -5,45 +5,51 @@ return {
         cmd = "Mason",
         keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
         build = ":MasonUpdate",
-        opts = {
-            ensure_installed = {
-                -- LSP servers (matching your vim.lsp.enable() config)
-                "lua-language-server",         -- Lua LSP
-                "gopls",                       -- Go LSP
-                "zls",                         -- Zig LSP
-                "typescript-language-server",  -- TypeScript LSP
-                "rust-analyzer",               -- Rust LSP
-                "intelephense",                -- PHP LSP
-                "tailwindcss-language-server", -- Tailwind CSS LSP
-                "html-lsp",                    -- HTML LSP
-                "css-lsp",                     -- CSS LSP
-                "vue-language-server",         -- Vue LSP
+        opts = function()
+            local tools = {
+                -- ========================================
+                -- TypeScript/JavaScript/Angular Stack
+                -- ========================================
+                "vtsls",                        -- TypeScript/JavaScript LSP (modern, replaces ts_ls)
+                "angular-language-server",      -- Angular Language Server
+                "nxls",                         -- Nx monorepo LSP
+                "eslint-lsp",                   -- ESLint LSP integration
+                "eslint_d",                     -- Fast ESLint daemon
+                "prettier",                     -- Code formatter (JS/TS/HTML/CSS/JSON)
 
-                -- Formatters (for conform.nvim and general use)
-                "stylua",
-                "goimports",
-                -- Note: gofmt comes with Go installation, not managed by Mason
-                "prettier",
-                "black",
-                "isort",
+                -- ========================================
+                -- C# .NET Stack
+                -- ========================================
+                "netcoredbg",                   -- .NET debugger
+                "csharpier",                    -- C# formatter
+                -- Note: Roslyn LSP is handled by easy-dotnet.nvim plugin
 
-                -- Linters and diagnostics
-                "golangci-lint",
-                "eslint_d",
-                "luacheck", -- Lua linting
-                "pint",     -- Laravel Pint for PHP (formatting & linting)
+                -- ========================================
+                -- Web Fundamentals
+                -- ========================================
+                "html-lsp",                     -- HTML Language Server
+                "css-lsp",                      -- CSS/SCSS Language Server
+                "tailwindcss-language-server",  -- Tailwind CSS LSP
+                "emmet-ls",                     -- Emmet abbreviations
 
-                -- Additional useful tools
-                "delve",      -- Go debugger
-                "shfmt",      -- Shell formatter
-                "shellcheck", -- Shell linter
+                -- ========================================
+                -- Config/Tooling/DevOps
+                -- ========================================
+                "lua-language-server",          -- Lua LSP (for editing Neovim config)
+                "stylua",                       -- Lua formatter
+                -- "luacheck",                  -- Lua linter (requires luarocks, often fails - install via brew/system package manager)
+                "markdownlint-cli2",            -- Markdown linter (for READMEs/docs)
+                "yaml-language-server",         -- YAML LSP (includes linting, for Docker/CI/CD)
+            }
 
-                -- Optional but useful additions
-                -- "markdownlint", -- Markdown linting
-                -- "yamllint",     -- YAML linting
-                -- "jsonlint",     -- JSON linting
-            },
-        },
+            -- Shell tools only on Unix-like systems (macOS/Linux)
+            if vim.fn.has("win32") == 0 then
+                table.insert(tools, "shfmt")        -- Shell script formatter
+                table.insert(tools, "shellcheck")   -- Shell script linter
+            end
+
+            return { ensure_installed = tools }
+        end,
         config = function(_, opts)
             -- PATH is handled by core.mason-path for consistency
             require("mason").setup(opts)

@@ -17,6 +17,25 @@ return {
 
       vim.cmd.colorscheme("gruvbox-material")
 
+      -- Custom terminal background (medium grey)
+      vim.api.nvim_set_hl(0, "SnacksTerminalNormal", {
+        bg = "#282828", -- Medium grey (lighter than #1d2021, darker than default)
+        fg = "#ebdbb2", -- Light text
+      })
+      vim.api.nvim_set_hl(0, "SnacksTerminalBorder", {
+        bg = "#282828", -- Match terminal background
+        fg = "#504945", -- Subtle border
+      })
+      vim.api.nvim_set_hl(0, "SnacksTerminalTitle", {
+        bg = "#282828",
+        fg = "#ebdbb2",
+      })
+      -- Also set the base Terminal highlight
+      vim.api.nvim_set_hl(0, "Terminal", {
+        bg = "#282828",
+        fg = "#ebdbb2",
+      })
+
       -- Custom statusline highlights
       -- vim.api.nvim_set_hl(0, "StatusLine", {
       --   bg = "#1C2021", -- Dark gray background

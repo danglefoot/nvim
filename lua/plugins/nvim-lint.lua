@@ -4,73 +4,27 @@ return {
     config = function()
         local lint = require("lint")
 
-        -- Configure custom linters using Mason-managed tools
-        local mason_bin_dir = vim.fn.stdpath("data") .. "/mason/bin"
-
-        -- Customize golangcilint to ignore exit codes (golangci-lint exits with code 1-3 when issues are found)
-        local golangcilint = require('lint').linters.golangcilint
-        golangcilint.ignore_exitcode = true
-
-        -- Configure Laravel Pint for linting (using --test mode)
-        local pint_cmd = vim.fn.executable(mason_bin_dir .. "/pint") == 1
-            and mason_bin_dir .. "/pint"
-            or "pint"
-
-        lint.linters.pint = {
-            cmd = pint_cmd,
-            stdin = false,
-            args = { "--test" },
-            stream = "stderr", -- Pint outputs diagnostics to stderr
-            ignore_exitcode = true,
-            parser = function(output, bufnr)
-                local diagnostics = {}
-
-                if not output or output == "" then
-                    return diagnostics
-                end
-
-                -- Check if output contains style issues
-                -- Pint outputs human-readable format by default when there are issues
-                if string.find(output, "FAIL") or string.find(output, "differs") then
-                    table.insert(diagnostics, {
-                        lnum = 0,
-                        col = 0,
-                        message = "Code style issues found - run formatter to fix",
-                        severity = vim.diagnostic.severity.WARN,
-                        source = "pint"
-                    })
-                end
-
-                return diagnostics
-            end,
-        }
-
         -- Configure linters by filetype (using Mason-managed tools)
         lint.linters_by_ft = {
-            -- Go
-            go = { "golangcilint" },
-
-            -- JavaScript/TypeScript
+            -- JavaScript/TypeScript (web dev)
             javascript = { "eslint_d" },
             typescript = { "eslint_d" },
             javascriptreact = { "eslint_d" },
             typescriptreact = { "eslint_d" },
 
-            -- Lua
+            -- Lua (for Neovim config editing)
             lua = { "luacheck" },
 
-            -- Shell
-            sh = { "shellcheck" },
-            bash = { "shellcheck" },
-            zsh = { "shellcheck" },
-
-            -- PHP/Laravel
-            php = { "pint" },
-
-            -- You can add more linters here as needed
-            -- python = { "flake8", "mypy" },
-            -- rust = { "clippy" },
+            -- Markdown (for documentation)
+            markdown = { "markdownlint-cli2" },
         }
+
+        -- Shell script linting (only on Unix-like systems)
+        if vim.fn.has("win32") == 0 then
+            lint.linters_by_ft.sh = { "shellcheck" }
+            lint.linters_by_ft.bash = { "shellcheck" }
+            lint.linters_by_ft.zsh = { "shellcheck" }
+        end
 
         -- Auto-lint on save and text changes
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
@@ -80,9 +34,35 @@ return {
             callback = function()
                 -- Only lint if linters are available for this filetype
                 local linters = lint.linters_by_ft[vim.bo.filetype]
-                if linters and #linters > 0 then
-                    lint.try_lint()
+                if not linters or #linters == 0 then
+                    return
                 end
+
+                -- For ESLint, only run if config file exists
+                if vim.tbl_contains(linters, "eslint_d") then
+                    local config_files = {
+                        ".eslintrc.js",
+                        ".eslintrc.cjs",
+                        ".eslintrc.yaml",
+                        ".eslintrc.yml",
+                        ".eslintrc.json",
+                        "eslint.config.js",
+                        "eslint.config.mjs",
+                        "eslint.config.cjs",
+                    }
+                    local has_config = false
+                    for _, config in ipairs(config_files) do
+                        if vim.fn.findfile(config, ".;") ~= "" then
+                            has_config = true
+                            break
+                        end
+                    end
+                    if not has_config then
+                        return -- Don't lint if no ESLint config found
+                    end
+                end
+
+                lint.try_lint()
             end,
         })
 
@@ -99,15 +79,6 @@ return {
                 print("No linters configured for filetype: " .. vim.bo.filetype)
             else
                 print("Linters for " .. vim.bo.filetype .. ": " .. table.concat(linters, ", "))
-
-                -- Show which tools are being used
-                if vim.bo.filetype == "php" then
-                    if string.find(pint_cmd, "mason") then
-                        print("Using Mason pint: " .. pint_cmd)
-                    else
-                        print("Using system pint: " .. pint_cmd)
-                    end
-                end
             end
         end, { desc = "Show available linters for current filetype" })
     end,

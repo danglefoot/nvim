@@ -24,9 +24,26 @@ return {
     scroll = { enabled = true},
     statuscolumn = { enabled = true },
     words = { enabled = true },
+    terminal = {
+      win = {
+        style = "terminal",
+      },
+    },
     styles = {
       notification = {
         -- wo = { wrap = true } -- Wrap notifications
+      },
+      terminal = {
+        bo = {
+          filetype = "snacks_terminal",
+        },
+        wo = {
+          winblend = 0,
+          winhighlight = "Normal:SnacksTerminalNormal,NormalFloat:SnacksTerminalNormal,FloatBorder:SnacksTerminalBorder",
+        },
+        keys = {
+          q = "hide",
+        },
       },
     },
   },
@@ -430,11 +447,11 @@ return {
       desc = "Notification History",
     },
     {
-      "Q",
+      "<leader>bd",
       function()
         Snacks.bufdelete()
       end,
-      desc = "Delete Buffer",
+      desc = "[B]uffer [D]elete",
     },
     {
       "<leader>cR",

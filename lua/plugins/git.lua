@@ -60,9 +60,9 @@ return {
             { buffer = bufnr, desc = "Preview git hunk" }
           )
 
-          vim.keymap.set("n", "]]", require("gitsigns").next_hunk, { buffer = bufnr, desc = "Next git hunk" })
-
-          vim.keymap.set("n", "[[", require("gitsigns").prev_hunk, { buffer = bufnr, desc = "Previous git hunk" })
+          -- Use ]h and [h for git hunks (standard convention)
+          vim.keymap.set("n", "]h", require("gitsigns").next_hunk, { buffer = bufnr, desc = "Next git hunk" })
+          vim.keymap.set("n", "[h", require("gitsigns").prev_hunk, { buffer = bufnr, desc = "Previous git hunk" })
         end,
       })
     end,

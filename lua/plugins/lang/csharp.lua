@@ -15,29 +15,29 @@ return {
       -- ========================================
       -- C# / .NET Keymaps
       -- ========================================
-      -- <leader>d prefix = [D]otnet commands
+      -- <leader>D prefix = [D]otnet commands (uppercase D)
 
-      vim.keymap.set("n", "<leader>db", dotnet.build_default_quickfix, {
+      vim.keymap.set("n", "<leader>Db", dotnet.build_default_quickfix, {
         desc = "[D]otnet [B]uild"
       })
 
-      vim.keymap.set("n", "<leader>dt", dotnet.test_default, {
+      vim.keymap.set("n", "<leader>Dt", dotnet.test_default, {
         desc = "[D]otnet [T]est"
       })
 
-      vim.keymap.set("n", "<leader>dr", dotnet.run_default, {
+      vim.keymap.set("n", "<leader>Dr", dotnet.run_default, {
         desc = "[D]otnet [R]un"
       })
 
-      vim.keymap.set("n", "<leader>ds", dotnet.secrets, {
+      vim.keymap.set("n", "<leader>Ds", dotnet.secrets, {
         desc = "[D]otnet [S]ecrets"
       })
 
-      vim.keymap.set("n", "<leader>dR", dotnet.restore, {
+      vim.keymap.set("n", "<leader>DR", dotnet.restore, {
         desc = "[D]otnet [R]estore"
       })
 
-      vim.keymap.set("n", "<leader>dc", dotnet.clean, {
+      vim.keymap.set("n", "<leader>Dc", dotnet.clean, {
         desc = "[D]otnet [C]lean"
       })
     end,

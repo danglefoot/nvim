@@ -105,16 +105,19 @@ vim.keymap.set("v", "<leader>ln", ':lua require("config.utils").get_highlighted_
 -- ============================================================================
 -- LSP KEYMAPS
 -- ============================================================================
+-- NOTE: Most LSP keymaps are defined in autocmds.lua via LspAttach
+-- These are global keymaps that work even without LSP attached
 
 -- Diagnostic navigation
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
--- Code actions & refactoring
+-- Code actions (defined globally, but also in autocmds.lua under <leader>l)
+-- Using <leader>c for easier access (c = code)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[C]ode [R]ename" })
-vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "[C]ode [F]ormat" })
+-- NOTE: <leader>cf is defined in conform.lua for formatting
 
 -- ============================================================================
 -- TERMINAL

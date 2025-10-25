@@ -18,61 +18,62 @@ return {
         'theHamsta/nvim-dap-virtual-text',
     },
     keys = {
+        -- <leader>d prefix = [D]ebug commands
         {
-            '<leader>Dc',
+            '<leader>dc',
             function()
                 require('dap').continue()
             end,
-            desc = 'Debug: Start/Continue',
+            desc = '[D]ebug: Start/Continue',
         },
         {
-            '<leader>Dsi',
+            '<leader>di',
             function()
                 require('dap').step_into()
             end,
-            desc = 'Debug: Step Into',
+            desc = '[D]ebug: Step [I]nto',
         },
         {
-            '<leader>DsO',
+            '<leader>do',
             function()
                 require('dap').step_over()
             end,
-            desc = 'Debug: Step Over',
+            desc = '[D]ebug: Step [O]ver',
         },
         {
-            '<leader>Dso',
+            '<leader>dO',
             function()
                 require('dap').step_out()
             end,
-            desc = 'Debug: Step Out',
+            desc = '[D]ebug: Step Out',
         },
         {
-            '<leader>Db',
+            '<leader>db',
             function()
                 require('dap').toggle_breakpoint()
             end,
-            desc = 'Debug: Toggle Breakpoint',
+            desc = '[D]ebug: Toggle [B]reakpoint',
         },
         {
-            '<leader>DB',
+            '<leader>dB',
             function()
                 require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
             end,
-            desc = 'Debug: Set Conditional Breakpoint',
+            desc = '[D]ebug: Conditional Breakpoint',
         },
         {
-            '<leader>Dt',
+            '<leader>dt',
             function()
                 require('dapui').toggle()
             end,
-            desc = 'Debug: Toggle UI',
+            desc = '[D]ebug: [T]oggle UI',
         },
         {
-            '<leader>Dl',
+            '<leader>dl',
             function()
                 require('dap').run_last()
             end,
-            desc = 'Debug: Run Last Configuration',
+            desc = '[D]ebug: Run [L]ast',
         },
     },
     config = function()

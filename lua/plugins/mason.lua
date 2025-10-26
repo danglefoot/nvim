@@ -52,7 +52,12 @@ return {
         end,
         config = function(_, opts)
             -- PATH is handled by core.mason-path for consistency
-            require("mason").setup(opts)
+            local ok, mason = pcall(require, "mason")
+            if not ok then
+                vim.notify("Mason not loaded yet, will be available after restart", vim.log.levels.WARN)
+                return
+            end
+            mason.setup(opts)
 
             -- Auto-install ensure_installed tools with better error handling
             local mr = require("mason-registry")

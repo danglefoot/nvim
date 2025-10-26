@@ -8,7 +8,12 @@ return {
             "nvim-treesitter/nvim-treesitter-textobjects",
         },
         config = function()
-            require("nvim-treesitter.configs").setup({
+            local ok, configs = pcall(require, "nvim-treesitter.configs")
+            if not ok then
+                vim.notify("Treesitter not loaded yet, will be available after restart", vim.log.levels.WARN)
+                return
+            end
+            configs.setup({
                 sync_install = false,
                 modules = {},
                 highlight = {
@@ -20,6 +25,8 @@ return {
                 ensure_installed = {
                     "bash",
                     "c",
+                    "c_sharp",
+                    "css",
                     "html",
                     "javascript",
                     "json",
@@ -28,25 +35,15 @@ return {
                     "luap",
                     "markdown",
                     "markdown_inline",
-                    "python",
                     "query",
                     "regex",
+                    "scss",
+                    "terraform",
                     "tsx",
                     "typescript",
-                    "vue",
                     "vim",
                     "vimdoc",
                     "yaml",
-                    "rust",
-                    "go",
-                    "gomod",
-                    "gowork",
-                    "gosum",
-                    "terraform",
-                    "proto",
-                    "zig",
-                    "php",
-                    "blade",
                 },
                 incremental_selection = {
                     enable = true,

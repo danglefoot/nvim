@@ -12,8 +12,8 @@ if vim.g.vscode then
   -- VS Code handles: LSP, completion, UI, colorscheme, file navigation
   -- Neovim handles: motions, keymaps, text objects, editing enhancements
 
-  require("config.options")  -- Basic Vim options (most work in VS Code)
-  require("vscode")          -- VS Code specific keymaps and integration
+  require("config.options")       -- Basic Vim options (most work in VS Code)
+  require("vscode-integration")  -- VS Code specific keymaps and integration
 else
   -- ========================================
   -- Standard Neovim

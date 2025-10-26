@@ -102,6 +102,9 @@ vim.keymap.set("n", "<C-n>", ":w %:h/", opts)
 -- Get highlighted line numbers in visual mode
 vim.keymap.set("v", "<leader>ln", ':lua require("config.utils").get_highlighted_line_numbers()<CR>', opts)
 
+-- Open Lazy plugin manager
+vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy Plugin Manager" })
+
 -- ============================================================================
 -- LSP KEYMAPS
 -- ============================================================================

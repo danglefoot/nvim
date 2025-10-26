@@ -1,19 +1,72 @@
 -- Mason PATH is handled by core.mason-path
-vim.lsp.enable({
-    "lua-ls",
-    "gopls",
-    "zls",
-    "ts-ls",
-    "rust-analyzer",
-    "intelephense",
-    "tailwindcss",
-    "html-ls",
-    "css-ls",
-    "vue-ls",
+-- Using Neovim 0.11 built-in LSP
+
+-- ========================================
+-- Configure and Start LSP Servers
+-- ========================================
+
+-- Load LSP configs
+local vtsls_config = require("lsp.vtsls")
+local angular_config = require("lsp.angular-language-server")
+local nxls_config = require("lsp.nxls")
+
+-- Auto-start LSP on file open
+local lsp_group = vim.api.nvim_create_augroup("LspAutostart", { clear = true })
+
+-- TypeScript/JavaScript files
+vim.api.nvim_create_autocmd("FileType", {
+  group = lsp_group,
+  pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+  callback = function(args)
+    vim.lsp.start(vim.tbl_extend("force", vtsls_config, {
+      name = "vtsls",
+      root_dir = vtsls_config.root_dir(vim.api.nvim_buf_get_name(args.buf)),
+    }))
+  end,
 })
 
--- LSP servers are automatically managed by Mason
--- Use :MasonVerify to check which tools are Mason-managed
+-- Angular (TypeScript + HTML)
+vim.api.nvim_create_autocmd("FileType", {
+  group = lsp_group,
+  pattern = { "typescript", "html", "typescriptreact" },
+  callback = function(args)
+    local bufname = vim.api.nvim_buf_get_name(args.buf)
+    local root = angular_config.root_dir(bufname)
+    if root then
+      vim.lsp.start(vim.tbl_extend("force", angular_config, {
+        name = "angularls",
+        root_dir = root,
+      }))
+    end
+  end,
+})
+
+-- Nx (JSON files in Nx projects)
+vim.api.nvim_create_autocmd("FileType", {
+  group = lsp_group,
+  pattern = "json",
+  callback = function(args)
+    local bufname = vim.api.nvim_buf_get_name(args.buf)
+    local root = nxls_config.root_dir(bufname)
+    if root then
+      vim.lsp.start(vim.tbl_extend("force", nxls_config, {
+        name = "nxls",
+        root_dir = root,
+      }))
+    end
+  end,
+})
+
+-- Enable other LSP servers with defaults
+vim.lsp.enable({
+    "eslint",
+    "html",
+    "cssls",
+    "tailwindcss",
+    "emmet_ls",
+    "lua_ls",
+    "yamlls",
+})
 
 vim.diagnostic.config({
     virtual_text = true,

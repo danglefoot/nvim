@@ -9,6 +9,9 @@ return {
     "typescript.tsx",
   },
   root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+  root_dir = function(fname)
+    return vim.fs.root(fname, { "tsconfig.json", "jsconfig.json", "package.json", ".git" })
+  end,
   settings = {
     typescript = {
       inlayHints = {

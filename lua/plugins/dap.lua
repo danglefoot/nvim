@@ -7,13 +7,6 @@ return {
         -- Required dependency for nvim-dap-ui
         'nvim-neotest/nvim-nio',
 
-        -- optional
-        -- 'mason-org/mason.nvim',
-        -- 'jay-babu/mason-nvim-dap.nvim',
-
-        -- Language-specific debuggers
-        'leoluz/nvim-dap-go', -- Golang
-
         -- Shows variable values inline as virtual text
         'theHamsta/nvim-dap-virtual-text',
     },
@@ -115,22 +108,36 @@ return {
         -- Setup virtual text to show variable values inline
         require("nvim-dap-virtual-text").setup()
 
-        require('dap-go').setup({
-            delve = {
-                -- Use Mason's delve installation with fallback to system delve
-                path = function()
-                    local mason_delve = vim.fn.stdpath("data") .. "/mason/bin/dlv"
-                    if vim.fn.executable(mason_delve) == 1 then
-                        return mason_delve
-                    end
-                    -- Fallback to system delve
-                    return vim.fn.exepath("dlv") ~= "" and vim.fn.exepath("dlv") or "dlv"
-                end,
+        -- ========================================
+        -- .NET Debugger Adapter (netcoredbg)
+        -- ========================================
+        local netcoredbg_path = vim.fn.stdpath("data") .. "/mason/bin/netcoredbg"
+        if vim.fn.has("win32") == 1 then
+            netcoredbg_path = netcoredbg_path .. ".exe"
+        end
 
-                -- On Windows delve must be run attached or it crashes.
-                -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
-                -- detached = vim.fn.has 'win32' == 0,
-            }
-        })
+        dap.adapters.coreclr = {
+            type = "executable",
+            command = netcoredbg_path,
+            args = { "--interpreter=vscode" },
+        }
+
+        -- C# Debugging Configurations
+        dap.configurations.cs = {
+            {
+                type = "coreclr",
+                name = "Launch .NET application",
+                request = "launch",
+                program = function()
+                    return vim.fn.input("Path to dll: ", vim.fn.getcwd() .. "/bin/Debug/", "file")
+                end,
+            },
+            {
+                type = "coreclr",
+                name = "Attach to .NET process",
+                request = "attach",
+                processId = require("dap.utils").pick_process,
+            },
+        }
     end,
 }

@@ -439,13 +439,7 @@ return {
       end,
       desc = "Select Scratch Buffer",
     },
-    {
-      "<leader>n",
-      function()
-        Snacks.notifier.show_history()
-      end,
-      desc = "Notification History",
-    },
+    -- Notification history removed - use <leader>sn to search notifications instead
     {
       "<leader>bd",
       function()

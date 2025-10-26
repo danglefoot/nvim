@@ -12,7 +12,11 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({ import = "plugins" }, {
+require("lazy").setup({
+  { import = "plugins" },
+  { import = "plugins.lang" },
+  { import = "plugins.debug" },
+}, {
   install = {
     missing = true,
     colorscheme = { "habamax" }

@@ -397,7 +397,7 @@ return {
       desc = "Goto T[y]pe Definition",
     },
     {
-      "<leader>p",
+      "<leader>cs",
       function()
         Snacks.picker.lsp_symbols()
       end,

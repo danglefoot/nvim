@@ -102,21 +102,23 @@ return {
   },
 
   -- Enhanced navigation (works in VS Code)
-  {
-    "folke/flash.nvim",
-    cond = true, -- Override default: always enable (even in VS Code)
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
-    },
-  },
+  -- NOTE: flash.nvim is configured in lua/plugins/flash.lua with gj prefix (go jump)
+  -- This duplicate config is commented out to avoid conflicts with 's' key (mini.surround)
+  -- {
+  --   "folke/flash.nvim",
+  --   cond = true, -- Override default: always enable (even in VS Code)
+  --   event = "VeryLazy",
+  --   ---@type Flash.Config
+  --   opts = {},
+  --   -- stylua: ignore
+  --   keys = {
+  --     { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+  --     { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+  --     { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+  --     { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+  --     { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+  --   },
+  -- },
 
   -- {
   --   "utilyre/barbecue.nvim",

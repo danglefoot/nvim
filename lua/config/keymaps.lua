@@ -53,6 +53,10 @@ end, { desc = "[B]uffer [O]nly (close others)" })
 -- WINDOW/PANE MANAGEMENT
 -- ============================================================================
 
+-- Split windows (using <leader> prefix to avoid conflict with mini.surround)
+vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split Vertical" })
+vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split Horizontal" })
+
 -- Navigate splits with Ctrl+hjkl (handled by vim-tmux-navigator plugin on macOS/Linux)
 -- Fallback for Windows where tmux-navigator is disabled
 if vim.fn.has("win32") == 1 then

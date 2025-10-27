@@ -37,11 +37,11 @@ end, { desc = "Navigate Down" })
 -- ============================================================================
 -- Window Splits
 -- ============================================================================
-vim.keymap.set("n", "sv", function()
+vim.keymap.set("n", "<leader>wv", function()
   vscode.action("workbench.action.splitEditor")
 end, { desc = "Split Vertical" })
 
-vim.keymap.set("n", "sh", function()
+vim.keymap.set("n", "<leader>wh", function()
   vscode.action("workbench.action.splitEditorDown")
 end, { desc = "Split Horizontal" })
 
@@ -83,9 +83,9 @@ vim.keymap.set("n", "<leader>cr", function()
   vscode.action("editor.action.rename")
 end, { desc = "Rename Symbol" })
 
-vim.keymap.set("n", "<leader>cs", function()
+vim.keymap.set("n", "<leader>co", function()
   vscode.action("workbench.action.gotoSymbol")
-end, { desc = "Go to Symbol" })
+end, { desc = "Go to Symbol (Outline)" })
 
 vim.keymap.set("n", "<leader>cf", function()
   vscode.action("editor.action.formatDocument")

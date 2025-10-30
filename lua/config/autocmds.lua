@@ -125,11 +125,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         local wk = require("which-key")
         wk.add({
-            { "<leader>la", vim.lsp.buf.code_action,                           desc = "Code Action" },
-            { "<leader>lA", vim.lsp.buf.range_code_action,                     desc = "Range Code Actions" },
-            { "<leader>ls", vim.lsp.buf.signature_help,                        desc = "Display Signature Information" },
-            { "<leader>lr", vim.lsp.buf.rename,                                desc = "Rename all references" },
-            { "<leader>lf", vim.lsp.buf.format,                                desc = "Format" },
             { "<leader>lc", require("config.utils").copyFilePathAndLineNumber, desc = "Copy File Path and Line Number" },
             { "<leader>Wa", vim.lsp.buf.add_workspace_folder,                  desc = "Workspace Add Folder" },
             { "<leader>Wr", vim.lsp.buf.remove_workspace_folder,               desc = "Workspace Remove Folder" },

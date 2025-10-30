@@ -6,12 +6,6 @@ return {
 
         -- Configure linters by filetype (using Mason-managed tools)
         lint.linters_by_ft = {
-            -- JavaScript/TypeScript (web dev)
-            javascript = { "eslint_d" },
-            typescript = { "eslint_d" },
-            javascriptreact = { "eslint_d" },
-            typescriptreact = { "eslint_d" },
-
             -- Lua (for Neovim config editing)
             lua = { "luacheck" },
 
@@ -36,30 +30,6 @@ return {
                 local linters = lint.linters_by_ft[vim.bo.filetype]
                 if not linters or #linters == 0 then
                     return
-                end
-
-                -- For ESLint, only run if config file exists
-                if vim.tbl_contains(linters, "eslint_d") then
-                    local config_files = {
-                        ".eslintrc.js",
-                        ".eslintrc.cjs",
-                        ".eslintrc.yaml",
-                        ".eslintrc.yml",
-                        ".eslintrc.json",
-                        "eslint.config.js",
-                        "eslint.config.mjs",
-                        "eslint.config.cjs",
-                    }
-                    local has_config = false
-                    for _, config in ipairs(config_files) do
-                        if vim.fn.findfile(config, ".;") ~= "" then
-                            has_config = true
-                            break
-                        end
-                    end
-                    if not has_config then
-                        return -- Don't lint if no ESLint config found
-                    end
                 end
 
                 lint.try_lint()

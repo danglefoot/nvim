@@ -50,12 +50,28 @@ vim.keymap.set("n", "<leader>bo", function()
 end, { desc = "[B]uffer [O]nly (close others)" })
 
 -- ============================================================================
+-- GIT COMMANDS
+-- ============================================================================
+
+-- Git commit (using Lazygit for better UX)
+vim.keymap.set("n", "<leader>gc", function()
+  require("snacks").lazygit({ args = { "commit" } })
+end, { desc = "Git Commit" })
+
+-- Git push
+vim.keymap.set("n", "<leader>gp", function()
+  require("snacks").lazygit({ args = { "push" } })
+end, { desc = "Git Push" })
+
+-- ============================================================================
 -- WINDOW/PANE MANAGEMENT
 -- ============================================================================
 
--- Split windows (using <leader> prefix to avoid conflict with mini.surround)
-vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split Vertical" })
-vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split Horizontal" })
+-- Split windows
+vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split Vertical" })
+vim.keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split Horizontal" })
+vim.keymap.set("n", "<leader>wq", "<C-w>c", { desc = "Close Split" })
+vim.keymap.set("n", "<leader>wm", "<C-w>|<C-w>_", { desc = "Maximize Split" })
 
 -- Navigate splits with Ctrl+hjkl (handled by vim-tmux-navigator plugin on macOS/Linux)
 -- Fallback for Windows where tmux-navigator is disabled
@@ -120,9 +136,8 @@ vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
--- Code actions (defined globally, but also in autocmds.lua under <leader>l)
--- Using <leader>c for easier access (c = code)
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
+-- Code actions
+vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
 vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[C]ode [R]ename" })
 -- NOTE: <leader>cf is defined in conform.lua for formatting
 

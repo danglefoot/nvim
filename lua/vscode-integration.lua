@@ -37,11 +37,11 @@ end, { desc = "Navigate Down" })
 -- ============================================================================
 -- Window Splits
 -- ============================================================================
-vim.keymap.set("n", "<leader>sv", function()
+vim.keymap.set("n", "<leader>wv", function()
   vscode.action("workbench.action.splitEditor")
 end, { desc = "Split Vertical" })
 
-vim.keymap.set("n", "<leader>sh", function()
+vim.keymap.set("n", "<leader>wh", function()
   vscode.action("workbench.action.splitEditorDown")
 end, { desc = "Split Horizontal" })
 

@@ -33,8 +33,9 @@ return {
         { "<leader>l", group = "LSP" },
         { "<leader>n", group = ".NET" },
         { "<leader>R", group = "Replace" },
-        { "<leader>s", group = "Search/Split" },
+        { "<leader>s", group = "Search" },
         { "<leader>u", group = "UI/Toggle" },
+        { "<leader>w", group = "Window" },
         { "<leader>W", group = "Workspace" },
         { "<leader>x", group = "Diagnostics" },
 

@@ -91,6 +91,25 @@ vim.keymap.set("n", "<leader>cf", function()
   vscode.action("editor.action.formatDocument")
 end, { desc = "Format Document" })
 
+-- ============================================================================
+-- Search Menu (<leader>s prefix)
+-- ============================================================================
+vim.keymap.set("n", "<leader>sf", function()
+  vscode.action("workbench.action.quickOpen")
+end, { desc = "Search Files" })
+
+vim.keymap.set("n", "<leader>st", function()
+  vscode.action("workbench.action.findInFiles")
+end, { desc = "Search Text (Grep)" })
+
+vim.keymap.set("n", "<leader>ss", function()
+  vscode.action("workbench.action.gotoSymbol")
+end, { desc = "Search Symbols" })
+
+vim.keymap.set("n", "<leader>sa", function()
+  vscode.action("workbench.action.showCommands")
+end, { desc = "Search Actions (Command Palette)" })
+
 -- Diagnostics
 vim.keymap.set("n", "]d", function()
   vscode.action("editor.action.marker.next")

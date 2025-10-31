@@ -239,6 +239,27 @@ return {
       end,
       desc = "Autocmds",
     },
+    {
+      "<leader>se",
+      function()
+        Snacks.picker.pickers()
+      end,
+      desc = "Search Everywhere (All Pickers)",
+    },
+    {
+      "<leader>sf",
+      function()
+        Snacks.picker.files()
+      end,
+      desc = "Search Files",
+    },
+    {
+      "<leader>ss",
+      function()
+        Snacks.picker.lsp_symbols()
+      end,
+      desc = "Search Symbols",
+    },
     -- Removed duplicate mapping for <leader>sb (already defined at line 175-180)
     {
       "<leader>sc",

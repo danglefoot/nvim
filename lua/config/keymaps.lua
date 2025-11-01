@@ -103,6 +103,15 @@ vim.keymap.set("n", "g#", "g#zz", opts)
 -- Clear search highlights with Esc
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", opts)
 
+-- Delete mark
+vim.keymap.set("n", "dm", function()
+  local mark = vim.fn.input("Delete mark: ")
+  if mark ~= "" then
+    vim.cmd("delmarks " .. mark)
+    print("Deleted mark '" .. mark .. "'")
+  end
+end, { desc = "Delete mark" })
+
 -- ============================================================================
 -- UTILITIES
 -- ============================================================================

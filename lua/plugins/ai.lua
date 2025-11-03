@@ -155,7 +155,7 @@ return {
     },
     {
         "zbirenbaum/copilot.lua",
-        enabled = false,
+        enabled = true,
         cmd = "Copilot",
         build = ":Copilot auth",
         event = "InsertEnter",
@@ -177,8 +177,8 @@ return {
                     },
                 },
                 suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
+                    enabled = false,
+                    auto_trigger = false,
                     debounce = 75,
                     keymap = {
                         accept = "<c-a>",

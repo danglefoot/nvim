@@ -14,6 +14,9 @@ return {
             {
                 "huijiro/blink-cmp-supermaven"
             },
+            {
+                "giuxtaposition/blink-cmp-copilot"
+            },
         },
         -- event = "InsertEnter",
         version = "*",
@@ -34,12 +37,18 @@ return {
                     -- per_filetype = {
                     --     codecompanion = { "codecompanion" },
                     -- },
-                    default = { "lsp", "path", "supermaven", "snippets", "lazydev", "buffer" },
+                    default = { "lsp", "path", "copilot", "supermaven", "snippets", "lazydev", "buffer" },
                     providers = {
                         supermaven = {
                             name = 'supermaven',
                             module = "blink-cmp-supermaven",
                             async = true
+                        },
+                        copilot = {
+                            name = "copilot",
+                            module = "blink-cmp-copilot",
+                            async = true,
+                            score_offset = 100,
                         },
                         lazydev = {
                             name = "LazyDev",

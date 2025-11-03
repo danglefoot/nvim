@@ -31,7 +31,7 @@ return {
           follow_files = true,
         },
         attach_to_untracked = true,
-        current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+        current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
         current_line_blame_opts = {
           virt_text = true,
           virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
@@ -67,84 +67,57 @@ return {
       })
     end,
     keys = {
+      -- Hunk operations (using ]h and [h for next/prev, see on_attach above)
       {
-        "<leader>Gk",
-        function()
-          require("gitsigns").prev_hunk({ navigation_message = false })
-        end,
-        desc = "Prev Hunk",
-      },
-      {
-        "<leader>Gl",
-        function()
-          require("gitsigns").blame_line()
-        end,
-        desc = "Blame",
-      },
-      {
-        "<leader>Gp",
+        "<leader>ghp",
         function()
           require("gitsigns").preview_hunk()
         end,
         desc = "Preview Hunk",
       },
       {
-        "<leader>Gr",
-        function()
-          require("gitsigns").reset_hunk()
-        end,
-        desc = "Reset Hunk",
-      },
-      {
-        "<leader>GR",
-        function()
-          require("gitsigns").reset_buffer()
-        end,
-        desc = "Reset Buffer",
-      },
-      {
-        "<leader>Gj",
-        function()
-          require("gitsigns").next_hunk({ navigation_message = false })
-        end,
-        desc = "Next Hunk",
-      },
-      {
-        "<leader>Gs",
+        "<leader>ghs",
         function()
           require("gitsigns").stage_hunk()
         end,
         desc = "Stage Hunk",
       },
       {
-        "<leader>Gu",
+        "<leader>ghu",
         function()
           require("gitsigns").undo_stage_hunk()
         end,
         desc = "Undo Stage Hunk",
       },
-      -- {
-      --   "<leader>Go", require("telescope.builtin").git_status,
-      --   desc = "Open changed file"
-      -- },
-      -- {
-      --   "<leader>Gb", require("telescope.builtin").git_branches,
-      --   desc = "Checkout branch"
-      -- },
-      -- {
-      --   "<leader>Gc", require("telescope.builtin").git_commits,
-      --   desc = "Checkout commit"
-      -- },
-      -- {
-      --   "<leader>GC", require("telescope.builtin").git_bcommits,
-      --   desc = "Checkout commit(for current file)"
-      -- },
       {
-        "<leader>Gd",
+        "<leader>ghr",
+        function()
+          require("gitsigns").reset_hunk()
+        end,
+        desc = "Reset Hunk",
+      },
+      -- Buffer/Blame operations
+      {
+        "<leader>gB",
+        function()
+          require("gitsigns").blame_line()
+        end,
+        desc = "Blame Line",
+      },
+      {
+        "<leader>gR",
+        function()
+          require("gitsigns").reset_buffer()
+        end,
+        desc = "Reset Buffer",
+      },
+      -- Diff operations
+      {
+        "<leader>gD",
         function()
           vim.cmd("Gitsigns diffthis HEAD")
         end,
-        desc = "Git Diff HEAD",
+        desc = "Diff HEAD",
       },
     },
   },
@@ -162,7 +135,7 @@ return {
     "mbbill/undotree",
     keys = {
       {
-        "<leader>GU",
+        "<leader>uu",
         ":UndotreeToggle<CR>",
         desc = "Toggle UndoTree",
       },

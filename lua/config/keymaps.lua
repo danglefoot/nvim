@@ -103,6 +103,13 @@ vim.keymap.set("n", "g#", "g#zz", opts)
 -- Clear search highlights with Esc
 vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", opts)
 
+-- ============================================================================
+-- MARKS
+-- ============================================================================
+
+-- List all marks
+vim.keymap.set("n", "<leader>lm", ":marks<CR>", { desc = "[L]ist [M]arks" })
+
 -- Delete mark
 vim.keymap.set("n", "dm", function()
   local mark = vim.fn.input("Delete mark: ")
@@ -110,7 +117,28 @@ vim.keymap.set("n", "dm", function()
     vim.cmd("delmarks " .. mark)
     print("Deleted mark '" .. mark .. "'")
   end
-end, { desc = "Delete mark" })
+end, { desc = "[D]elete [M]ark" })
+
+-- Delete all marks in current buffer
+vim.keymap.set("n", "dm!", ":delmarks!<CR>", { desc = "[D]elete all [M]arks in buffer" })
+
+-- Next/previous mark (by line)
+vim.keymap.set("n", "]'", function()
+  vim.cmd("normal! ]'")
+end, { desc = "Next mark (line)" })
+
+vim.keymap.set("n", "['", function()
+  vim.cmd("normal! ['")
+end, { desc = "Previous mark (line)" })
+
+-- Next/previous mark (exact position)
+vim.keymap.set("n", "]`", function()
+  vim.cmd("normal! ]`")
+end, { desc = "Next mark (position)" })
+
+vim.keymap.set("n", "[`", function()
+  vim.cmd("normal! [`")
+end, { desc = "Previous mark (position)" })
 
 -- ============================================================================
 -- UTILITIES

@@ -9,6 +9,7 @@
 local vtsls_config = require("lsp.vtsls")
 local angular_config = require("lsp.angular-language-server")
 local nxls_config = require("lsp.nxls")
+local lua_ls_config = require("lsp.lua-ls")
 
 -- Auto-start LSP on file open
 local lsp_group = vim.api.nvim_create_augroup("LspAutostart", { clear = true })
@@ -57,6 +58,18 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- Lua files
+vim.api.nvim_create_autocmd("FileType", {
+  group = lsp_group,
+  pattern = "lua",
+  callback = function(args)
+    vim.lsp.start(vim.tbl_extend("force", lua_ls_config, {
+      name = "lua_ls",
+      root_dir = vim.fs.root(args.buf, lua_ls_config.root_markers),
+    }))
+  end,
+})
+
 -- Enable other LSP servers with defaults
 vim.lsp.enable({
     "eslint",
@@ -64,7 +77,6 @@ vim.lsp.enable({
     "cssls",
     "tailwindcss",
     "emmet_ls",
-    "lua_ls",
     "yamlls",
 })
 

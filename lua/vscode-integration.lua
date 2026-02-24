@@ -135,7 +135,6 @@ end, { desc = "Close Other Buffers" })
 -- ============================================================================
 vim.keymap.set("n", "<leader>e", function()
   vscode.action("workbench.action.toggleSidebarVisibility")
-  vscode.action("workbench.files.action.focusFilesExplorer")
 end, { desc = "Toggle Explorer" })
 
 -- ============================================================================

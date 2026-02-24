@@ -121,7 +121,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("gs", vim.lsp.buf.signature_help, "Signature Documentation")
         map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
-        map("<leader>v", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Goto Definition in Vertical Split")
+        map("<leader>cv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "[C]ode: Goto Definition in [V]ertical Split")
 
         local wk = require("which-key")
         wk.add({

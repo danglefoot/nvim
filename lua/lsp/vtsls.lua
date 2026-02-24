@@ -43,4 +43,16 @@ return {
         completeFunctionCalls = true },
     },
   },
+  capabilities = vim.tbl_deep_extend(
+    "force",
+    vim.lsp.protocol.make_client_capabilities(),
+    {
+      workspace = {
+        fileOperations = {
+          didRename = true,
+          willRename = true,
+        },
+      },
+    }
+  ),
 }

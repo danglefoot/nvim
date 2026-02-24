@@ -17,7 +17,7 @@ return {
     "nvim-lua/plenary.nvim",
     keys = {
       {
-        "<leader>at",
+        "<leader>ga",
         function()
           local current_file = vim.fn.expand("%:p")
           local is_ts = current_file:match("%.ts$")
@@ -45,7 +45,7 @@ return {
             print("Not an Angular component or template file")
           end
         end,
-        desc = "[A]ngular [T]oggle Component/Template",
+        desc = "[G]oto [A]ngular related file (component/template)",
       },
     },
   },

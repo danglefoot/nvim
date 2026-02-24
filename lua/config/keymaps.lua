@@ -4,6 +4,10 @@ local opts = { noremap = true, silent = true }
 -- EDITING & MOVEMENT
 -- ============================================================================
 
+-- Keep cursor centered when scrolling
+vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
+vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
+
 -- Redo with U (more convenient than Ctrl+r)
 vim.keymap.set("n", "U", "<C-r>", opts)
 
@@ -19,9 +23,9 @@ vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
--- Paste over currently selected text without yanking it
-vim.keymap.set("v", "p", '"_dp')
-vim.keymap.set("v", "P", '"_dP')
+-- Delete to void register (black hole) - doesn't affect clipboard
+-- Note: For paste-over-without-losing-yank, use yanky cycling (p then <c-p>)
+vim.keymap.set({ "n", "v" }, "<leader>D", '"_d', { desc = "Delete to void (keep clipboard)" })
 
 -- Copy everything between { and } including the brackets
 vim.keymap.set("n", "YY", "va{Vy", opts)
@@ -50,6 +54,13 @@ vim.keymap.set("n", "<leader>bo", function()
 end, { desc = "[B]uffer [O]nly (close others)" })
 
 -- ============================================================================
+-- FILE OPERATIONS
+-- ============================================================================
+
+-- Fast quitting
+vim.keymap.set("n", "<leader>q", ":q!<CR>", opts)
+
+-- ============================================================================
 -- GIT COMMANDS
 -- ============================================================================
 
@@ -66,12 +77,7 @@ end, { desc = "Git Push" })
 -- ============================================================================
 -- WINDOW/PANE MANAGEMENT
 -- ============================================================================
-
--- Split windows
-vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split Vertical" })
-vim.keymap.set("n", "<leader>wh", "<C-w>s", { desc = "Split Horizontal" })
-vim.keymap.set("n", "<leader>wq", "<C-w>c", { desc = "Close Split" })
-vim.keymap.set("n", "<leader>wm", "<C-w>|<C-w>_", { desc = "Maximize Split" })
+-- Use native Ctrl-w commands: <C-w>v (vsplit), <C-w>s (split), <C-w>c (close), etc.
 
 -- Navigate splits with Ctrl+hjkl (handled by vim-tmux-navigator plugin on macOS/Linux)
 -- Fallback for Windows where tmux-navigator is disabled
@@ -147,17 +153,24 @@ end, { desc = "Previous mark (position)" })
 -- Split line with X (opposite of J which joins)
 vim.keymap.set("n", "X", ":keeppatterns substitute/\\s*\\%#\\s*/\\r/e <bar> normal! ==^<cr>", { silent = true })
 
--- Ctrl+x to cut full line
-vim.keymap.set("n", "<C-x>", "dd", opts)
-
 -- Select all
 vim.keymap.set("n", "<C-a>", "ggVG", opts)
 
--- Write file in current directory (:w %:h/<new-file-name>)
-vim.keymap.set("n", "<C-n>", ":w %:h/", opts)
+-- List notifications
+vim.keymap.set("n", "<leader>ln", function()
+  require("snacks").notifier.show_history()
+end, { desc = "[L]ist [N]otifications" })
 
--- Get highlighted line numbers in visual mode
-vim.keymap.set("v", "<leader>ln", ':lua require("config.utils").get_highlighted_line_numbers()<CR>', opts)
+-- Copy file paths (for Claude Code integration)
+vim.keymap.set("n", "<leader>yr", function()
+  vim.fn.setreg("+", vim.fn.expand("%"))
+  print("Copied relative path: " .. vim.fn.expand("%"))
+end, { desc = "[Y]ank [R]elative path" })
+
+vim.keymap.set("n", "<leader>ya", function()
+  vim.fn.setreg("+", vim.fn.expand("%:p"))
+  print("Copied absolute path: " .. vim.fn.expand("%:p"))
+end, { desc = "[Y]ank [A]bsolute path" })
 
 -- Open Lazy plugin manager
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy Plugin Manager" })
@@ -171,7 +184,7 @@ vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy Plugin Manager"
 -- Diagnostic navigation
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
+vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, { desc = "[L]ist [D]iagnostics in quickfix" })
 
 -- Code actions
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })

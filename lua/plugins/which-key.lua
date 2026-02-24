@@ -29,14 +29,15 @@ return {
         { "<leader>d", group = "Debug" },
         { "<leader>f", group = "Find" },
         { "<leader>g", group = "Git" },
+        { "<leader>gh", group = "Git Hunk" },
         { "<leader>l", group = "List" },
         { "<leader>n", group = ".NET" },
         { "<leader>R", group = "Replace" },
         { "<leader>s", group = "Search" },
         { "<leader>u", group = "UI/Toggle" },
-        { "<leader>w", group = "Window" },
         { "<leader>W", group = "Workspace" },
         { "<leader>x", group = "Diagnostics" },
+        { "<leader>y", group = "Yank/Copy" },
 
         -- Navigation groups
         { "[",         group = "Previous" },

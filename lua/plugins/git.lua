@@ -66,43 +66,43 @@ return {
         function()
           require("gitsigns").preview_hunk()
         end,
-        desc = "Preview Hunk",
+        desc = "[P]review hunk",
       },
       {
         "<leader>ghs",
         function()
           require("gitsigns").stage_hunk()
         end,
-        desc = "Stage Hunk",
+        desc = "[S]tage hunk",
       },
       {
         "<leader>ghu",
         function()
           require("gitsigns").undo_stage_hunk()
         end,
-        desc = "Undo Stage Hunk",
+        desc = "[U]ndo stage hunk",
       },
       {
         "<leader>ghr",
         function()
           require("gitsigns").reset_hunk()
         end,
-        desc = "Reset Hunk",
+        desc = "[R]eset hunk",
       },
       -- Buffer/Blame operations
       {
-        "<leader>gB",
+        "<leader>ghb",
         function()
           require("gitsigns").blame_line()
         end,
-        desc = "Blame Line",
+        desc = "[B]lame line",
       },
       {
         "<leader>gR",
         function()
           require("gitsigns").reset_buffer()
         end,
-        desc = "Reset Buffer",
+        desc = "[R]eset buffer",
       },
       -- Diff operations
       {
@@ -110,7 +110,7 @@ return {
         function()
           vim.cmd("Gitsigns diffthis HEAD")
         end,
-        desc = "Diff HEAD",
+        desc = "[D]iff HEAD",
       },
     },
   },
@@ -130,7 +130,7 @@ return {
       {
         "<leader>uu",
         ":UndotreeToggle<CR>",
-        desc = "Toggle UndoTree",
+        desc = "[U]ndoTree",
       },
     },
   },

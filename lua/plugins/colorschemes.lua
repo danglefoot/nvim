@@ -1,7 +1,9 @@
 return {
   {
     "sainnhe/gruvbox-material",
-    enabled = true,
+    -- Disabled: github-nvim-theme (lua/plugins/github-theme.lua) is now the
+    -- default and auto-switches light/dark. Flip back to true to use gruvbox.
+    enabled = false,
     priority = 1000,
     config = function()
       vim.g.gruvbox_material_transparent_background = 1

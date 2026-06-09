@@ -19,7 +19,7 @@ return {
       function()
         require("flash").jump()
       end,
-      desc = "Flash jump",
+      desc = "[S]earch jump",
     },
     -- Treesitter-based jump (smart word/function boundaries)
     {
@@ -28,7 +28,7 @@ return {
       function()
         require("flash").treesitter()
       end,
-      desc = "Flash Treesitter",
+      desc = "[T]reesitter jump",
     },
     -- Jump to line
     {
@@ -41,7 +41,7 @@ return {
           pattern = "^"
         })
       end,
-      desc = "Flash to line",
+      desc = "Jump to [L]ine",
     },
     -- Word jump
     {
@@ -53,7 +53,7 @@ return {
           search = { mode = "search" },
         })
       end,
-      desc = "Flash word forward",
+      desc = "Jump to [W]ord",
     },
     -- Search with flash
     {
@@ -69,7 +69,7 @@ return {
           pattern = "^",
         })
       end,
-      desc = "Flash search",
+      desc = "Jump via [/]search",
     },
     -- Toggle flash search in command mode
     {

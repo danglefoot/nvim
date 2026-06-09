@@ -17,56 +17,56 @@ return {
             function()
                 require('dap').continue()
             end,
-            desc = '[D]ebug: Start/Continue',
+            desc = '[C]ontinue',
         },
         {
             '<leader>di',
             function()
                 require('dap').step_into()
             end,
-            desc = '[D]ebug: Step [I]nto',
+            desc = 'Step [I]nto',
         },
         {
             '<leader>do',
             function()
                 require('dap').step_over()
             end,
-            desc = '[D]ebug: Step [O]ver',
+            desc = 'Step [O]ver',
         },
         {
             '<leader>dO',
             function()
                 require('dap').step_out()
             end,
-            desc = '[D]ebug: Step Out',
+            desc = 'Step [O]ut',
         },
         {
             '<leader>db',
             function()
                 require('dap').toggle_breakpoint()
             end,
-            desc = '[D]ebug: Toggle [B]reakpoint',
+            desc = 'Toggle [B]reakpoint',
         },
         {
             '<leader>dB',
             function()
                 require('dap').set_breakpoint(vim.fn.input 'Breakpoint condition: ')
             end,
-            desc = '[D]ebug: Conditional Breakpoint',
+            desc = 'Conditional [B]reakpoint',
         },
         {
             '<leader>dt',
             function()
                 require('dapui').toggle()
             end,
-            desc = '[D]ebug: [T]oggle UI',
+            desc = '[T]oggle UI',
         },
         {
             '<leader>dl',
             function()
                 require('dap').run_last()
             end,
-            desc = '[D]ebug: Run [L]ast',
+            desc = 'Run [L]ast',
         },
     },
     config = function()

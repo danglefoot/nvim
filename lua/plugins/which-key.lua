@@ -24,12 +24,14 @@ return {
       {
         mode = { "n", "v" },
         -- Main groups (organized alphabetically for clarity)
+        { "<leader>a", group = "Angular" },
         { "<leader>b", group = "Buffer" },
         { "<leader>c", group = "Code" },
         { "<leader>d", group = "Debug" },
         { "<leader>f", group = "Find" },
         { "<leader>g", group = "Git" },
         { "<leader>gh", group = "Git Hunk" },
+        { "<leader>i", group = "AI" },
         { "<leader>l", group = "List" },
         { "<leader>n", group = ".NET" },
         { "<leader>R", group = "Replace" },
@@ -43,6 +45,9 @@ return {
         { "[",         group = "Previous" },
         { "]",         group = "Next" },
         { "g",         group = "Goto" },
+        { "gj",        group = "Jump" },
+        { "s",         group = "Surround", mode = { "x" } },
+        { "z",         group = "Fold" },
       },
     },
   },
@@ -52,7 +57,7 @@ return {
       function()
         require("which-key").show({ global = false })
       end,
-      desc = "Buffer Local Keymaps (which-key)",
+      desc = "Buffer Local Keymaps",
     },
   },
 }

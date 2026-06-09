@@ -81,7 +81,7 @@ return {
           end,
         })
       end,
-      desc = "[S]earch [Y]ank history",
+      desc = "[Y]ank history",
     },
   },
 }

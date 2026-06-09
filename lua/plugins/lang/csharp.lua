@@ -23,27 +23,27 @@ return {
       -- <leader>n prefix = [N]ET/Dotnet commands
 
       vim.keymap.set("n", "<leader>nb", dotnet.build_default_quickfix, {
-        desc = "[N]ET [B]uild"
+        desc = "[B]uild"
       })
 
       vim.keymap.set("n", "<leader>nt", dotnet.test_default, {
-        desc = "[N]ET [T]est"
+        desc = "[T]est"
       })
 
       vim.keymap.set("n", "<leader>nr", dotnet.run_default, {
-        desc = "[N]ET [R]un"
+        desc = "[R]un"
       })
 
       vim.keymap.set("n", "<leader>ns", dotnet.secrets, {
-        desc = "[N]ET [S]ecrets"
+        desc = "[S]ecrets"
       })
 
       vim.keymap.set("n", "<leader>nR", dotnet.restore, {
-        desc = "[N]ET [R]estore"
+        desc = "[R]estore"
       })
 
       vim.keymap.set("n", "<leader>nc", dotnet.clean, {
-        desc = "[N]ET [C]lean"
+        desc = "[C]lean"
       })
     end,
   },

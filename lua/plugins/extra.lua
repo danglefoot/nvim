@@ -41,21 +41,21 @@ return {
         function()
           require("spectre").open()
         end,
-        desc = "Replace",
+        desc = "Find and [R]eplace",
       },
       {
         "<leader>Rw",
         function()
           require("spectre").open_visual({ select_word = true })
         end,
-        desc = "Replace Word",
+        desc = "Replace [W]ord under cursor",
       },
       {
         "<leader>Rf",
         function()
           require("spectre").open_file_search()
         end,
-        desc = "Replace Buffer",
+        desc = "Replace in [F]ile",
       },
     },
   },
@@ -219,7 +219,7 @@ return {
         function()
           vim.cmd("ShowkeysToggle")
         end,
-        desc = "Show key presses",
+        desc = "[T]oggle key display",
       },
     },
   },

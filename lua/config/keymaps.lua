@@ -12,8 +12,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
 vim.keymap.set("n", "U", "<C-r>", opts)
 
 -- Move selected line / block of text in visual mode (VSCode-like)
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", opts)
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", opts)
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move selection up" })
 
 -- Remap for dealing with visual line wraps
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
@@ -25,14 +25,14 @@ vim.keymap.set("v", ">", ">gv")
 
 -- Delete to void register (black hole) - doesn't affect clipboard
 -- Note: For paste-over-without-losing-yank, use yanky cycling (p then <c-p>)
-vim.keymap.set({ "n", "v" }, "<leader>D", '"_d', { desc = "Delete to void (keep clipboard)" })
+vim.keymap.set({ "n", "v" }, "<leader>D", '"_d', { desc = "[D]elete to void" })
 
 -- Copy everything between { and } including the brackets
 vim.keymap.set("n", "YY", "va{Vy", opts)
 
 -- Move to start/end of line (H=Home, L=Last)
-vim.keymap.set({ "n", "x", "o" }, "H", "^", opts)
-vim.keymap.set({ "n", "x", "o" }, "L", "g_", opts)
+vim.keymap.set({ "n", "x", "o" }, "H", "^", { noremap = true, silent = true, desc = "Start of line" })
+vim.keymap.set({ "n", "x", "o" }, "L", "g_", { noremap = true, silent = true, desc = "End of line" })
 
 -- ============================================================================
 -- BUFFER & NAVIGATION
@@ -51,7 +51,7 @@ vim.keymap.set("n", "<leader>bo", function()
       pcall(vim.api.nvim_buf_delete, buf, { force = false })
     end
   end
-end, { desc = "[B]uffer [O]nly (close others)" })
+end, { desc = "[O]nly (close others)" })
 
 -- ============================================================================
 -- FILE OPERATIONS
@@ -67,12 +67,12 @@ vim.keymap.set("n", "<leader>q", ":q!<CR>", opts)
 -- Git commit (using Lazygit for better UX)
 vim.keymap.set("n", "<leader>gc", function()
   require("snacks").lazygit({ args = { "commit" } })
-end, { desc = "Git Commit" })
+end, { desc = "[C]ommit" })
 
 -- Git push
 vim.keymap.set("n", "<leader>gp", function()
   require("snacks").lazygit({ args = { "push" } })
-end, { desc = "Git Push" })
+end, { desc = "[P]ush" })
 
 -- ============================================================================
 -- WINDOW/PANE MANAGEMENT
@@ -114,7 +114,7 @@ vim.keymap.set("n", "<Esc>", ":nohlsearch<CR>", opts)
 -- ============================================================================
 
 -- List all marks
-vim.keymap.set("n", "<leader>lm", ":marks<CR>", { desc = "[L]ist [M]arks" })
+vim.keymap.set("n", "<leader>lm", ":marks<CR>", { desc = "[M]arks" })
 
 -- Delete mark
 vim.keymap.set("n", "dm", function()
@@ -123,10 +123,10 @@ vim.keymap.set("n", "dm", function()
     vim.cmd("delmarks " .. mark)
     print("Deleted mark '" .. mark .. "'")
   end
-end, { desc = "[D]elete [M]ark" })
+end, { desc = "Delete Mark" })
 
 -- Delete all marks in current buffer
-vim.keymap.set("n", "dm!", ":delmarks!<CR>", { desc = "[D]elete all [M]arks in buffer" })
+vim.keymap.set("n", "dm!", ":delmarks!<CR>", { desc = "Delete All Marks" })
 
 -- Next/previous mark (by line)
 vim.keymap.set("n", "]'", function()
@@ -159,18 +159,18 @@ vim.keymap.set("n", "<C-a>", "ggVG", opts)
 -- List notifications
 vim.keymap.set("n", "<leader>ln", function()
   require("snacks").notifier.show_history()
-end, { desc = "[L]ist [N]otifications" })
+end, { desc = "[N]otification history" })
 
 -- Copy file paths (for Claude Code integration)
 vim.keymap.set("n", "<leader>yr", function()
   vim.fn.setreg("+", vim.fn.expand("%"))
   print("Copied relative path: " .. vim.fn.expand("%"))
-end, { desc = "[Y]ank [R]elative path" })
+end, { desc = "[R]elative path" })
 
 vim.keymap.set("n", "<leader>ya", function()
   vim.fn.setreg("+", vim.fn.expand("%:p"))
   print("Copied absolute path: " .. vim.fn.expand("%:p"))
-end, { desc = "[Y]ank [A]bsolute path" })
+end, { desc = "[A]bsolute path" })
 
 -- Open Lazy plugin manager
 vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy Plugin Manager" })
@@ -182,13 +182,13 @@ vim.keymap.set("n", "<leader>L", "<cmd>Lazy<cr>", { desc = "Lazy Plugin Manager"
 -- These are global keymaps that work even without LSP attached
 
 -- Diagnostic navigation
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic" })
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic" })
-vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, { desc = "[L]ist [D]iagnostics in quickfix" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous [D]iagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next [D]iagnostic" })
+vim.keymap.set("n", "<leader>ld", vim.diagnostic.setloclist, { desc = "[D]iagnostics to loclist" })
 
 -- Code actions
-vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction" })
-vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[C]ode [R]ename" })
+vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "[A]ction" })
+vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "[R]ename symbol" })
 -- NOTE: <leader>cf is defined in conform.lua for formatting
 
 -- ============================================================================

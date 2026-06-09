@@ -37,19 +37,19 @@ return {
         })
 
         -- Manual linting command
-        vim.keymap.set("n", "<leader>cl", function()
+        vim.keymap.set("n", "<leader>cL", function()
             lint.try_lint()
             vim.notify("Linting...", vim.log.levels.INFO, { title = "nvim-lint" })
-        end, { desc = "[C]ode [L]int" })
+        end, { desc = "[L]int" })
 
         -- Show linter status
-        vim.keymap.set("n", "<leader>cli", function()
+        vim.keymap.set("n", "<leader>cI", function()
             local linters = lint.linters_by_ft[vim.bo.filetype] or {}
             if #linters == 0 then
                 print("No linters configured for filetype: " .. vim.bo.filetype)
             else
                 print("Linters for " .. vim.bo.filetype .. ": " .. table.concat(linters, ", "))
             end
-        end, { desc = "[C]ode [L]int [I]nfo" })
+        end, { desc = "Lint [I]nfo" })
     end,
 }

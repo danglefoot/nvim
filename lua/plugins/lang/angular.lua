@@ -9,7 +9,7 @@ return {
       nx_cmd_root = "npx nx",
     },
     keys = {
-      { "<leader>na", "<cmd>Telescope nx actions<CR>", desc = "[N]x [A]ctions" },
+      { "<leader>an", "<cmd>Telescope nx actions<CR>", desc = "[N]x actions" },
     },
   },
   -- Angular component/template navigation
@@ -17,7 +17,7 @@ return {
     "nvim-lua/plenary.nvim",
     keys = {
       {
-        "<leader>ga",
+        "<leader>at",
         function()
           local current_file = vim.fn.expand("%:p")
           local is_ts = current_file:match("%.ts$")
@@ -45,7 +45,7 @@ return {
             print("Not an Angular component or template file")
           end
         end,
-        desc = "[G]oto [A]ngular related file (component/template)",
+        desc = "[T]oggle component/template",
       },
     },
   },

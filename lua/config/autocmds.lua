@@ -112,28 +112,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup('lsp-attach', { clear = true }),
     callback = function(event)
         local map = function(keys, func, desc)
-            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
         end
 
 
-        map("gl", vim.diagnostic.open_float, "Open Diagnostic Float")
-        map("K", vim.lsp.buf.hover, "Hover Documentation")
-        map("gs", vim.lsp.buf.signature_help, "Signature Documentation")
-        map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+        map("gl", vim.diagnostic.open_float, "Diagnostic float")
+        map("K", vim.lsp.buf.hover, "Hover documentation")
+        map("gs", vim.lsp.buf.signature_help, "Signature help")
+        map("gD", vim.lsp.buf.declaration, "Goto [D]eclaration")
 
-        map("<leader>cv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "[C]ode: Goto Definition in [V]ertical Split")
+        map("<leader>cv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Definition in [V]split")
 
         local wk = require("which-key")
         wk.add({
-            { "<leader>lc", require("config.utils").copyFilePathAndLineNumber, desc = "Copy File Path and Line Number" },
-            { "<leader>Wa", vim.lsp.buf.add_workspace_folder,                  desc = "Workspace Add Folder" },
-            { "<leader>Wr", vim.lsp.buf.remove_workspace_folder,               desc = "Workspace Remove Folder" },
+            { "<leader>yc", require("config.utils").copyFilePathAndLineNumber, desc = "[C]opy path:line" },
+            { "<leader>Wa", vim.lsp.buf.add_workspace_folder,                  desc = "[A]dd folder" },
+            { "<leader>Wr", vim.lsp.buf.remove_workspace_folder,               desc = "[R]emove folder" },
             {
                 "<leader>Wl",
                 function()
                     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
                 end,
-                desc = "Workspace List Folders",
+                desc = "[L]ist folders",
             },
         })
 
@@ -170,11 +170,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
 
 
-        if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
-            map('<leader>th', function()
-                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
-            end, '[T]oggle Inlay [H]ints')
-        end
+        -- NOTE: Inlay hints toggle is handled by <leader>uh via Snacks.toggle.inlay_hints()
     end,
 
 })

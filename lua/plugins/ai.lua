@@ -18,7 +18,7 @@ return {
       -- Toggle Supermaven on/off
       vim.keymap.set("n", "<leader>ua", function()
         require("supermaven-nvim.api").toggle()
-      end, { desc = "Toggle [A]I (Supermaven)" })
+      end, { desc = "Toggle [A]I" })
     end,
   },
 }

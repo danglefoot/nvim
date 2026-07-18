@@ -40,6 +40,7 @@ return {
                 -- "luacheck",                  -- Lua linter (requires luarocks, often fails - install via brew/system package manager)
                 "markdownlint-cli2",            -- Markdown linter (for READMEs/docs)
                 "yaml-language-server",         -- YAML LSP (includes linting, for Docker/CI/CD)
+                "sql-formatter",                -- SQL formatter (conform: sql_formatter)
             }
 
             -- Shell tools only on Unix-like systems (macOS/Linux)

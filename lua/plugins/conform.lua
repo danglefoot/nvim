@@ -47,6 +47,9 @@ return {
             sh = { "shfmt" },
             bash = { "shfmt" },
 
+            -- SQL
+            sql = { "sql_formatter" },
+
             -- Other (system tools)
             rust = { "rustfmt" }, -- comes with Rust installation
 
@@ -54,6 +57,15 @@ return {
             -- markdown = { "markdownlint" },
             -- yaml = { "yamllint" },
             -- toml = { "taplo" },
+        },
+        formatters = {
+            sql_formatter = {
+                -- Dialect is per-buffer; set with :SqlDialect. Defaults to postgresql.
+                prepend_args = function(_, ctx)
+                    local lang = vim.b[ctx.buf].sql_dialect or "postgresql"
+                    return { "--language", lang }
+                end,
+            },
         },
         default_format_opts = {
             lsp_format = "fallback",
@@ -66,5 +78,16 @@ return {
     },
     init = function()
         vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+        -- Switch the sql-formatter dialect for the current buffer (e.g. :SqlDialect transactsql)
+        vim.api.nvim_create_user_command("SqlDialect", function(o)
+            vim.b.sql_dialect = o.args
+            vim.notify("SQL dialect → " .. o.args, vim.log.levels.INFO, { title = "Conform" })
+        end, {
+            nargs = 1,
+            complete = function()
+                return { "postgresql", "transactsql", "sql" }
+            end,
+        })
     end,
 }

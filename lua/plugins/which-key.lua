@@ -59,9 +59,27 @@ return {
     {
       "<leader>?",
       function()
+        Snacks.win({
+          file = vim.fn.stdpath("config") .. "/KEYMAPS.md",
+          width = 0.85,
+          height = 0.9,
+          wo = {
+            spell = false,
+            wrap = false,
+            signcolumn = "no",
+            statuscolumn = " ",
+            conceallevel = 2,
+          },
+        })
+      end,
+      desc = "Keymap cheat sheet",
+    },
+    {
+      "<leader>sK",
+      function()
         require("which-key").show({ global = false })
       end,
-      desc = "Buffer Local Keymaps",
+      desc = "[K]eymaps (buffer-local)",
     },
   },
 }

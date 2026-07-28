@@ -119,7 +119,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("gl", vim.diagnostic.open_float, "Diagnostic float")
         map("K", vim.lsp.buf.hover, "Hover documentation")
         map("gs", vim.lsp.buf.signature_help, "Signature help")
-        map("gD", vim.lsp.buf.declaration, "Goto [D]eclaration")
+        -- gD (Goto declaration) is provided globally by snacks.nvim (lsp_declarations)
 
         map("<leader>cv", "<cmd>vsplit | lua vim.lsp.buf.definition()<cr>", "Definition in [V]split")
 

@@ -99,7 +99,8 @@ Persistent, curated file bookmarks (survive restarts).
 | `<leader>ss` | Symbols (LSP) |
 | `<leader>sd` / `<leader>sD` | Diagnostics / buffer diagnostics |
 | `<leader>sj` | Jumps |
-| `<leader>sk` | Keymaps |
+| `<leader>sk` | Keymaps (all) |
+| `<leader>sK` | Keymaps (buffer-local, which-key) |
 | `<leader>sm` / `<leader>sM` | Marks / man pages |
 | `<leader>s"` | Registers |
 | `<leader>s/` | Search history |
@@ -147,14 +148,28 @@ Persistent, curated file bookmarks (survive restarts).
 | `<leader>cI` | Lint info | n |
 | `<leader>cp` / `<leader>cP` | Swap parameter next / previous | n |
 
-### Completion (blink.cmp + Supermaven)
+### Completion — blink.cmp menu + Supermaven ghost text
+
+**Supermaven inline (ghost text):**
 | Keys | Action |
 |------|--------|
-| `<Tab>` | Accept Supermaven suggestion |
-| `<M-f>` | Accept next word of suggestion |
-| `<C-e>` | Dismiss Supermaven suggestion |
+| `<Tab>` | Accept full suggestion |
+| `<M-f>` | Accept next word |
+| `<C-e>` | Dismiss suggestion |
 
-*(blink.cmp otherwise uses its default preset; `<C-f>` is unmapped.)*
+**blink.cmp popup menu (default preset):**
+| Keys | Action |
+|------|--------|
+| `<C-Space>` | Show menu / toggle documentation |
+| `<C-y>` | Select & accept item |
+| `<C-e>` | Cancel menu |
+| `<C-n>` / `<C-p>` | Select next / previous item |
+| `<Down>` / `<Up>` | Select next / previous item |
+| `<Tab>` / `<S-Tab>` | Jump to next / previous snippet placeholder |
+| `<C-b>` | Scroll documentation up |
+| `<C-k>` | Toggle signature help |
+
+*`<C-f>` (scroll docs down in the default preset) is disabled in this config.*
 
 ---
 
@@ -259,7 +274,8 @@ Persistent, curated file bookmarks (survive restarts).
 | Keys | Action |
 |------|--------|
 | `<leader>nb` | Build |
-| `<leader>nt` | Test |
+| `<leader>nt` | Test (default project) |
+| `<leader>nT` | Test runner UI (easy-dotnet) |
 | `<leader>nr` / `<leader>nR` | Run / restore |
 | `<leader>ns` | Secrets |
 | `<leader>nc` | Clean |
@@ -366,6 +382,7 @@ Persistent, curated file bookmarks (survive restarts).
 | `<leader>Wa` / `<leader>Wr` | Add / remove workspace folder |
 | `<leader>Wl` | List workspace folders |
 | `<leader>WS` | Workspace symbols |
+| `<leader>?` | Open this cheat sheet (floating) |
 | `<leader>L` | Lazy plugin manager |
 | `<leader>N` | Neovim news |
 | `<leader>ln` | Notification history |

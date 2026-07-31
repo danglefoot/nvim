@@ -9,10 +9,7 @@ local M = {}
 -- Plugins that should ONLY run in standard Neovim (disabled in VS Code)
 M.neovim_only_plugins = {
   -- UI/Visual
-  "gruvbox-material",
-  "forest-night.nvim",
-  "base16-nvim",
-  "catppuccin",
+  "github-theme",
   "noice.nvim",
   "snacks.nvim",
   "which-key.nvim",

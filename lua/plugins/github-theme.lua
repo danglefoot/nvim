@@ -1,7 +1,7 @@
 return {
   -- GitHub's official themes ported to Neovim, following macOS appearance the
-  -- same way Ghostty does. `github_light` / `github_dark` match Ghostty's
-  -- "GitHub" and "GitHub Dark".
+  -- same way Ghostty does. `github_light_high_contrast` / `github_dark_dimmed`
+  -- match Ghostty's "GitHub Light High Contrast" and "GitHub Dark Dimmed".
   --
   -- NOTE: we intentionally do NOT use auto-dark-mode.nvim here. It detects the
   -- system appearance via `defaults read -g AppleInterfaceStyle`, which reads a
@@ -33,7 +33,7 @@ return {
         end
         applied = want
         vim.o.background = want
-        vim.cmd.colorscheme(is_dark and "github_dark" or "github_light_high_contrast")
+        vim.cmd.colorscheme(is_dark and "github_dark_dimmed" or "github_light_high_contrast")
       end
 
       local function sync()

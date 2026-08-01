@@ -56,6 +56,12 @@ return {
         )
       end
 
+      -- Non-macOS: no appearance to follow, apply dark once and skip polling.
+      if vim.fn.executable("osascript") == 0 then
+        apply(true)
+        return
+      end
+
       sync() -- apply on startup
 
       -- Re-check when returning to Neovim and on a light interval, so toggling

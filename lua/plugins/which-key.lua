@@ -2,7 +2,7 @@ return {
   "folke/which-key.nvim",
   event = "VeryLazy",
   opts = {
-    preset = "helix",
+    preset = "classic",
     delay = 300,
     icons = {
       rules = false,
@@ -31,6 +31,7 @@ return {
         { "<leader>f", group = "Find" },
         { "<leader>g", group = "Git" },
         { "<leader>gh", group = "Git Hunk" },
+        { "<leader>go", group = "Octo (GitHub)" },
         { "<leader>i", group = "AI" },
         { "<leader>l", group = "List" },
         { "<leader>m", group = "Bookmarks" },
@@ -44,6 +45,18 @@ return {
         { "<leader>W", group = "Workspace" },
         { "<leader>x", group = "Diagnostics" },
         { "<leader>y", group = "Yank/Copy" },
+
+        -- Octo localleader prefixes (buffer-local maps; groups only render in
+        -- buffers that actually have them)
+        { "<localleader>a", group = "Assignee" },
+        { "<localleader>c", group = "Comment" },
+        { "<localleader>g", group = "Goto" },
+        { "<localleader>i", group = "Issue" },
+        { "<localleader>l", group = "Label" },
+        { "<localleader>p", group = "PR" },
+        { "<localleader>r", group = "React" },
+        { "<localleader>s", group = "Suggestion" },
+        { "<localleader>v", group = "Review" },
 
         -- Navigation groups
         { "[",         group = "Previous" },

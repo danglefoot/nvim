@@ -123,6 +123,27 @@ return {
   "tpope/vim-fugitive",
   "tpope/vim-rhubarb",
 
+  -- GitHub PRs/issues/reviews via the gh CLI
+  {
+    "pwntester/octo.nvim",
+    cmd = "Octo",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "folke/snacks.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      picker = "snacks",
+    },
+    keys = {
+      { "<leader>gol", "<cmd>Octo pr list<cr>", desc = "[L]ist PRs" },
+      { "<leader>gos", "<cmd>Octo pr search<cr>", desc = "[S]earch PRs" },
+      { "<leader>gor", "<cmd>Octo review<cr>", desc = "[R]eview PR" },
+      { "<leader>goi", "<cmd>Octo issue list<cr>", desc = "[I]ssue list" },
+      { "<leader>goo", "<cmd>Octo<cr>", desc = "[O]cto picker" },
+    },
+  },
+
   -- not git, but it's okay
   {
     "mbbill/undotree",

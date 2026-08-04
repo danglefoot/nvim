@@ -1,5 +1,5 @@
 vim.g.mapleader = " "                                   -- change leader to a space
-vim.g.maplocalleader = " "                              -- change localleader to a space
+vim.g.maplocalleader = ","                              -- localleader for filetype/plugin-local maps (octo etc.)
 
 vim.g.loaded_netrw = 1                                  -- disable netrw
 vim.g.loaded_netrwPlugin = 1                            --  disable netrw

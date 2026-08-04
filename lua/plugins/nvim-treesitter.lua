@@ -87,12 +87,12 @@ return {
                         set_jumps = true, -- whether to set jumps in the jumplist
                         goto_previous_start = {
                             ["[f"] = { query = "@function.outer", desc = "Previous function" },
-                            ["[c"] = { query = "@class.outer", desc = "Previous class" },
+                            -- [c / ]c are defined below as smart maps: class motion
+                            -- normally, native change-jump in diff windows
                             ["[p"] = { query = "@parameter.inner", desc = "Previous parameter" },
                         },
                         goto_next_start = {
                             ["]f"] = { query = "@function.outer", desc = "Next function" },
-                            ["]c"] = { query = "@class.outer", desc = "Next class" },
                             ["]p"] = { query = "@parameter.inner", desc = "Next parameter" },
                         },
                     },
@@ -107,6 +107,28 @@ return {
                     },
                 },
             })
+
+            -- Smart ]c / [c: native change-jump in diff windows (octo review,
+            -- diffview, :diffthis), treesitter class motion everywhere else.
+            vim.keymap.set("n", "]c", function()
+                if vim.wo.diff then
+                    return "]c"
+                end
+                vim.schedule(function()
+                    require("nvim-treesitter.textobjects.move").goto_next_start("@class.outer")
+                end)
+                return "<Ignore>"
+            end, { expr = true, desc = "Next class / diff change" })
+
+            vim.keymap.set("n", "[c", function()
+                if vim.wo.diff then
+                    return "[c"
+                end
+                vim.schedule(function()
+                    require("nvim-treesitter.textobjects.move").goto_previous_start("@class.outer")
+                end)
+                return "<Ignore>"
+            end, { expr = true, desc = "Previous class / diff change" })
         end,
     },
 }
